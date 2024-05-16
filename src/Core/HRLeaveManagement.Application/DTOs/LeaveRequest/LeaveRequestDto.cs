@@ -1,6 +1,6 @@
 ﻿using HRLeaveManagement.Application.DTOs.Common;
 
-namespace HRLeaveManagement.Application.DTOs;
+namespace HRLeaveManagement.Application.DTOs.LeaveRequest;
 
 public class LeaveRequestDto : BaseDto
 {
