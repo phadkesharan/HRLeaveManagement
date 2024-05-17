@@ -7,24 +7,8 @@ public class CreateLeaveRequestDtoValidator : AbstractValidator<CreateLeaveReque
 {
     private readonly ILeaveRequestRepository _leaveRequestRepository;
 
-    public CreateLeaveRequestDtoValidator(ILeaveRequestRepository leaveAllocationRepository)
+    public CreateLeaveRequestDtoValidator(ILeaveRequestRepository leaveRequestRepository)
     {
-        _leaveRequestRepository = leaveAllocationRepository;
-
-        RuleFor(p => p.StartDate)
-            .LessThan(p => p.EndDate);
-
-        RuleFor(p => p.EndDate)
-            .GreaterThan(p => p.StartDate);
-
-        RuleFor(p =>p.LeaveTypeId)
-            .NotNull().WithMessage("{PropertyName} cannot be Null")
-            .GreaterThan(0)
-            .MustAsync(async (id, token) => {
-                var leaveAllocationExists = await _leaveRequestRepository.Exists(id);
-                return !leaveAllocationExists;                
-            });
-
-        
+        _leaveRequestRepository = leaveRequestRepository;
     }
 }
