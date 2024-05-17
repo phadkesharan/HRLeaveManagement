@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
+using HRLeaveManagement.Application.Feature.LeaveRequests.Requests.Commands;
 using HRLeaveManagement.Application.Persistence.Contracts;
 using HRLeaveManagement.Domain;
 using MediatR;
 
-namespace HRLeaveManagement.Application;
+namespace HRLeaveManagement.Application.Feature.LeaveRequests.Handlers.Commands;
 
 public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveRequestCommand, int>
 {

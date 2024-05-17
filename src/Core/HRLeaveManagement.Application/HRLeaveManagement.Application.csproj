@@ -13,7 +13,6 @@
     <Folder Include="Features/LeaveAllocations/Handlers/Commands/" />
     <Folder Include="Features/LeaveAllocations/Requests/Commands/" />
     <Folder Include="Features/LeaveTypes/Handlers/Commands/" />
-    <Folder Include="Features/LeaveTypes/Requests/Commands/" />
   </ItemGroup>
 
   <PropertyGroup>
