@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HRLeaveManagement.Application.Feature.LeaveTypes.Requests.Commands;
 using HRLeaveManagement.Application.Persistence.Contracts;
+using HRLeaveManagement.Domain;
 using MediatR;
 
 namespace HRLeaveManagement.Application.Feature.LeaveTypes.Handlers.Commands;
@@ -17,8 +18,11 @@ public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeComm
         _mapper = mapper;
     }
 
-    public Task<int> Handle(CreateLeaveTypeCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateLeaveTypeCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var leaveType = _mapper.Map<LeaveType>(request.leaveTypeDto);
+        leaveType = await _leaveTypeRepository.Add(leaveType);
+
+        return leaveType.Id;
     }
 }
