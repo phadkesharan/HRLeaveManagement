@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HRLeaveManagement.Application.DTOs.LeaveRequest.Validators;
 using HRLeaveManagement.Application.Feature.LeaveRequests.Requests.Commands;
 using HRLeaveManagement.Application.Persistence.Contracts;
 using HRLeaveManagement.Domain;
@@ -19,6 +20,15 @@ public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveReque
 
     public async Task<int> Handle(CreateLeaveRequestCommand request, CancellationToken cancellationToken)
     {
+        CreateLeaveRequestDtoValidator validator = new(_leaveRequestRepository);
+        var validationResult = await validator.ValidateAsync(request.leaveRequestDto, cancellationToken);
+
+        if(validationResult.IsValid == false)
+        {
+            throw new Exception();
+        } 
+
+
         var leaveRequest = _mapper.Map<LeaveRequest>(request.leaveRequestDto);
         leaveRequest = await _leaveRequestRepository.Add(leaveRequest);
         return leaveRequest.Id;

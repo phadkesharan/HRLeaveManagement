@@ -1,12 +1,16 @@
-﻿using System.Data;
-using FluentValidation;
+﻿using FluentValidation;
+using HRLeaveManagement.Application.Persistence.Contracts;
 
 namespace HRLeaveManagement.Application.DTOs.LeaveAllocation.Validator;
 
 public class CreateLeaveAllocationDtoValidator : AbstractValidator<CreateLeaveAllocationDto>
 {
-    public CreateLeaveAllocationDtoValidator()
+    private readonly ILeaveAllocationRepository _leaveAllocationRepository;
+
+    public CreateLeaveAllocationDtoValidator(ILeaveAllocationRepository leaveAllocationRepository)
     {
+        _leaveAllocationRepository = leaveAllocationRepository;
+
         RuleFor(p => p.NumberOfDays)
             .NotNull().WithMessage("{PropertyName} cannot be Null")
             .NotEmpty().WithMessage("{PropertyName} cannot be Empty")
@@ -20,7 +24,12 @@ public class CreateLeaveAllocationDtoValidator : AbstractValidator<CreateLeaveAl
             .LessThan(100).WithMessage("{PropertyName} should be less than 100");
 
         RuleFor(p =>p.LeaveTypeId)
-            .NotNull().WithMessage("{PropertyName} cannot be Null");
+            .NotNull().WithMessage("{PropertyName} cannot be Null")
+            .GreaterThan(0)
+            .MustAsync(async (id, token) => {
+                var leaveAllocationExists = await _leaveAllocationRepository.Exists(id);
+                return !leaveAllocationExists;                
+            });
 
     }
 }

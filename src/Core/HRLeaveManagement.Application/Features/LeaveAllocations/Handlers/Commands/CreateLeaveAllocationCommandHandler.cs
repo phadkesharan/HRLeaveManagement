@@ -20,8 +20,13 @@ public class CreateLeaveAllocationCommandHandler : IRequestHandler<CreateLeaveAl
 
     public async Task<int> Handle(CreateLeaveAllocationCommand request, CancellationToken cancellationToken)
     {
-        CreateLeaveAllocationDtoValidator validator = new();
+        CreateLeaveAllocationDtoValidator validator = new(_leaveAllocationRepository);
         var validationResult = await validator.ValidateAsync(request.leaveAllocationDto, cancellationToken);
+
+        if(validationResult.IsValid == false)
+        {
+            throw new Exception();
+        } 
 
         var leaveAllocation = _mapper.Map<LeaveAllocation>(request.leaveAllocationDto);
         leaveAllocation = await _leaveAllocationRepository.Add(leaveAllocation);
