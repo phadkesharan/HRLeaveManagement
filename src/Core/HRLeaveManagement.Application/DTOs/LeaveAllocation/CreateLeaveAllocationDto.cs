@@ -1,4 +1,4 @@
-﻿namespace HRLeaveManagement.Application;
+﻿namespace HRLeaveManagement.Application.DTOs.LeaveAllocation;
 
 public class CreateLeaveAllocationDto
 {
