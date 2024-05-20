@@ -1,6 +1,5 @@
 ﻿using HRLeaveManagement.Application.Persistence.Contracts;
 using HRLeaveManagement.Domain;
-using HRLeaveManagement.Persistence.Repositories;
 
 namespace HRLeaveManagement.Persistence.Repositories;
 

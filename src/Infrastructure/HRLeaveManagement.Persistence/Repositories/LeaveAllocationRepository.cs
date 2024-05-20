@@ -1,10 +1,9 @@
 ﻿using HRLeaveManagement.Application.Exceptions;
 using HRLeaveManagement.Application.Persistence.Contracts;
 using HRLeaveManagement.Domain;
-using HRLeaveManagement.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace HRLeaveManagement.Persistence;
+namespace HRLeaveManagement.Persistence.Repositories;
 
 public class LeaveAllocationRepository : GenericRepository<LeaveAllocation>, ILeaveAllocationRepository
 {
