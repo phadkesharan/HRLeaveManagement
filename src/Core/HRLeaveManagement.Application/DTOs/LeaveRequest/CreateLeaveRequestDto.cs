@@ -1,6 +1,6 @@
 ﻿namespace HRLeaveManagement.Application.DTOs.LeaveRequest;
 
-public class CreateLeaveRequestDto
+public class CreateLeaveRequestDto : ILeaveRequestDto
 {
     public DateTime StartDate { get; set; }
 

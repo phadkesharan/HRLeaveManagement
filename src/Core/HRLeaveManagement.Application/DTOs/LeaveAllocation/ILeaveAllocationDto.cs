@@ -1,6 +1,6 @@
-﻿namespace HRLeaveManagement.Application.DTOs.LeaveAllocation;
+﻿namespace HRLeaveManagement.Application;
 
-public class CreateLeaveAllocationDto : ILeaveAllocationDto
+public interface ILeaveAllocationDto
 {
     public int NumberOfDays { get; set; }
 

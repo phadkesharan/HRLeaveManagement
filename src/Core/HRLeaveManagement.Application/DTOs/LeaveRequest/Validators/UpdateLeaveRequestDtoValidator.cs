@@ -3,13 +3,15 @@ using HRLeaveManagement.Application.Persistence.Contracts;
 
 namespace HRLeaveManagement.Application.DTOs.LeaveRequest.Validators;
 
-public class CreateLeaveRequestDtoValidator : AbstractValidator<CreateLeaveRequestDto>
+public class UpdateLeaveRequestDtoValidator : AbstractValidator<UpdateLeaveRequestDto>
 {
     private readonly ILeaveRequestRepository _leaveRequestRepository;
 
-    public CreateLeaveRequestDtoValidator(ILeaveRequestRepository leaveRequestRepository)
+    public UpdateLeaveRequestDtoValidator(ILeaveRequestRepository leaveRequestRepository)
     {
         _leaveRequestRepository = leaveRequestRepository;
         Include(new ILeaveRequestDtoValidator(leaveRequestRepository));
+
+        RuleFor(p => p.Id).NotNull();
     }
 }
