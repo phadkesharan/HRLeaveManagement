@@ -1,4 +1,4 @@
-﻿namespace HRLeaveManagement.Application;
+﻿namespace HRLeaveManagement.Application.Exceptions;
 
 public class BadRequestException : ApplicationException
 {
