@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRLeaveManagement.Domain", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRLeaveManagement.Application", "src\Core\HRLeaveManagement.Application\HRLeaveManagement.Application.csproj", "{BDF10599-C283-473B-BA48-FD1A39D54118}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRLeaveManagement.Infrastructure", "src\Infrastructure\HRLeaveManagement.Infrastructure\HRLeaveManagement.Infrastructure.csproj", "{552A0639-5306-4FFF-8154-D03F2E00C1E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRLeaveManagement.Persistence", "src\Infrastructure\HRLeaveManagement.Persistence\HRLeaveManagement.Persistence.csproj", "{9CBF880F-6F4D-4225-BA4D-C28DFBA7D898}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,14 @@ Global
 		{BDF10599-C283-473B-BA48-FD1A39D54118}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDF10599-C283-473B-BA48-FD1A39D54118}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDF10599-C283-473B-BA48-FD1A39D54118}.Release|Any CPU.Build.0 = Release|Any CPU
+		{552A0639-5306-4FFF-8154-D03F2E00C1E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{552A0639-5306-4FFF-8154-D03F2E00C1E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{552A0639-5306-4FFF-8154-D03F2E00C1E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{552A0639-5306-4FFF-8154-D03F2E00C1E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CBF880F-6F4D-4225-BA4D-C28DFBA7D898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CBF880F-6F4D-4225-BA4D-C28DFBA7D898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CBF880F-6F4D-4225-BA4D-C28DFBA7D898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CBF880F-6F4D-4225-BA4D-C28DFBA7D898}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,5 +53,7 @@ Global
 		{F991A5F7-28FD-4AAF-9171-61713AA2DEDC} = {A33CAF21-A4EE-474A-A3F0-E0406A5DDBC2}
 		{7873393E-4482-4690-B8A2-7E43C6E38D23} = {8BE27B03-A9BE-466B-B7B3-3895CC854B6C}
 		{BDF10599-C283-473B-BA48-FD1A39D54118} = {8BE27B03-A9BE-466B-B7B3-3895CC854B6C}
+		{552A0639-5306-4FFF-8154-D03F2E00C1E6} = {F991A5F7-28FD-4AAF-9171-61713AA2DEDC}
+		{9CBF880F-6F4D-4225-BA4D-C28DFBA7D898} = {F991A5F7-28FD-4AAF-9171-61713AA2DEDC}
 	EndGlobalSection
 EndGlobal
