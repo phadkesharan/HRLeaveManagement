@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HRLeaveManagement.Application.Exceptions;
 using HRLeaveManagement.Application.Feature.LeaveTypes.Requests.Commands;
 using HRLeaveManagement.Application.Persistence.Contracts;
 using MediatR;
@@ -23,7 +24,7 @@ public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeComm
 
         if(validationResult.IsValid == false)
         {
-            throw new Exception();
+            throw new ValidationException(validationResult);
         }
 
         var leaveType = await _leaveTypeRepository.Get(request.leaveTypeDto.Id);
