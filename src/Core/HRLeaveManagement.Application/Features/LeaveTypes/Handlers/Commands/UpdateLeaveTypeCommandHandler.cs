@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using HRLeaveManagement.Application.Feature.LeaveRequests.Requests.Commands;
+using HRLeaveManagement.Application.Feature.LeaveTypes.Requests.Commands;
 using HRLeaveManagement.Application.Persistence.Contracts;
 using MediatR;
 
 namespace HRLeaveManagement.Application;
 
-public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveRequestCommand, Unit>
+public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeCommand, Unit>
 {
     private readonly ILeaveTypeRepository _leaveTypeRepository;
     private readonly IMapper _mapper;
@@ -16,10 +16,18 @@ public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveRequestC
         _mapper = mapper;
     }
 
-    public async Task<Unit> Handle(UpdateLeaveRequestCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateLeaveTypeCommand request, CancellationToken cancellationToken)
     {
-        var leaveType = await _leaveTypeRepository.Get(request.leaveRequestDto.Id);
-        _mapper.Map(request.leaveRequestDto, leaveType);
+        UpdateLeaveTypeDtoValidator validator = new();
+        var validationResult = await validator.ValidateAsync(request.leaveTypeDto, cancellationToken);
+
+        if(validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
+        var leaveType = await _leaveTypeRepository.Get(request.leaveTypeDto.Id);
+        _mapper.Map(request.leaveTypeDto, leaveType);
 
         await _leaveTypeRepository.Update(leaveType);
         return Unit.Value;

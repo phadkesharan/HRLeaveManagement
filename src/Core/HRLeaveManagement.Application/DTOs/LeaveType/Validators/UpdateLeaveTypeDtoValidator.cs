@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
+using HRLeaveManagement.Application.DTOs.LeaveRequest;
 using HRLeaveManagement.Application.DTOs.LeaveType;
 
 namespace HRLeaveManagement.Application;
 
-public class UpdateLeaveTypeDtoValidator : AbstractValidator<LeaveTypeDto>
+public class UpdateLeaveTypeDtoValidator : AbstractValidator<UpdateLeaveTypeDto>
 {
     public UpdateLeaveTypeDtoValidator()
     {
