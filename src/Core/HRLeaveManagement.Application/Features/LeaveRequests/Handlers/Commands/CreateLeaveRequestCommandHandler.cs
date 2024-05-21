@@ -2,6 +2,8 @@
 using HRLeaveManagement.Application.DTOs.LeaveRequest.Validators;
 using HRLeaveManagement.Application.Exceptions;
 using HRLeaveManagement.Application.Feature.LeaveRequests.Requests.Commands;
+using HRLeaveManagement.Application.Infrastructure.Contracts;
+using HRLeaveManagement.Application.Models;
 using HRLeaveManagement.Application.Persistence.Contracts;
 using HRLeaveManagement.Application.Responses;
 using HRLeaveManagement.Domain;
@@ -13,11 +15,13 @@ public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveReque
 {
     private readonly ILeaveRequestRepository _leaveRequestRepository;
     private readonly IMapper _mapper;
+    private readonly IEmailSender _emailSender;
 
-    public CreateLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository, IMapper mapper)
+    public CreateLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository, IMapper mapper, IEmailSender emailSender)
     {
         _leaveRequestRepository = leaveRequestRepository;
         _mapper = mapper;
+        _emailSender = emailSender;
     }
 
     // Sending Appropriate Response
@@ -45,6 +49,23 @@ public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveReque
         response.Success = true;
         response.Message = $"{nameof(CreateLeaveRequestCommand)} Successfull";
         response.Id = leaveRequest.Id;
+
+        var email = new Email
+        {
+            To = "dummyTo@gmail.com",
+            Subject = "Request for leave",
+            Body = $"Leave request from {request.leaveRequestDto.StartDate} to {request.leaveRequestDto.EndDate} has been send successfully!",
+        };
+
+        try
+        {
+            var emailSendResponse = await _emailSender.SendEmail(email);
+        }
+        catch (Exception)
+        {
+            //Handle Failed Email
+        }
+
 
         return response;
     }
