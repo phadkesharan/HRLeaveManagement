@@ -1,4 +1,5 @@
-﻿using HRLeaveManagement.Application.DTOs.LeaveType;
+﻿using HRLeaveManagement.Application;
+using HRLeaveManagement.Application.DTOs.LeaveType;
 using HRLeaveManagement.Application.Feature.LeaveTypes.Requests.Commands;
 using HRLeaveManagement.Application.Feature.LeaveTypes.Requests.Queries;
 using MediatR;
@@ -40,5 +41,22 @@ public class LeaveTypeController : ControllerBase
 
         return CreatedAtAction(nameof(Get), new { Id = leaveTypeId }, leaveTypeDto);
     }
+
+    [HttpPut]
+    public async Task<ActionResult> Put([FromBody] UpdateLeaveTypeDto leaveTypeDto)
+    {
+        await _mediator.Send(new UpdateLeaveTypeCommand() { leaveTypeDto = leaveTypeDto });
+
+        return NoContent();
+    }
+
+    [HttpDelete]
+    public async Task<ActionResult> Delete(int id)
+    {
+        await _mediator.Send(new DeleteLeaveTypeCommand() { Id = id });
+
+        return NoContent();
+    } 
+
 
 }
