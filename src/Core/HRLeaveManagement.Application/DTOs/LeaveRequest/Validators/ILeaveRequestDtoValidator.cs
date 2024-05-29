@@ -5,11 +5,11 @@ namespace HRLeaveManagement.Application.DTOs.LeaveRequest.Validators;
 
 public class ILeaveRequestDtoValidator : AbstractValidator<ILeaveRequestDto>
 {
-    private readonly ILeaveRequestRepository _leaveRequestRepository;
+    private readonly ILeaveTypeRepository _leaveTypeRepository;
 
-    public ILeaveRequestDtoValidator(ILeaveRequestRepository leaveRequestRepository)
+    public ILeaveRequestDtoValidator(ILeaveTypeRepository leaveTypeRepository)
     {
-        _leaveRequestRepository = leaveRequestRepository;
+        _leaveTypeRepository = leaveTypeRepository;
 
         RuleFor(p => p.StartDate)
             .LessThan(p => p.EndDate);
@@ -21,8 +21,8 @@ public class ILeaveRequestDtoValidator : AbstractValidator<ILeaveRequestDto>
             .NotNull().WithMessage("{PropertyName} cannot be Null")
             .GreaterThan(0)
             .MustAsync(async (id, token) => {
-                var leaveRequestExists = await _leaveRequestRepository.Exists(id);
-                return !leaveRequestExists;                
+                var leaveTypeExists = await _leaveTypeRepository.Exists(id);
+                return leaveTypeExists;                
             });
     }
 }

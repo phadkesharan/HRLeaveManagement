@@ -14,12 +14,15 @@ namespace HRLeaveManagement.Application.Feature.LeaveRequests.Handlers.Commands;
 public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveRequestCommand, BaseCommandResponse>
 {
     private readonly ILeaveRequestRepository _leaveRequestRepository;
+    private readonly ILeaveTypeRepository _leaveTypeRepository;
+
     private readonly IMapper _mapper;
     private readonly IEmailSender _emailSender;
 
-    public CreateLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository, IMapper mapper, IEmailSender emailSender)
+    public CreateLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository, ILeaveTypeRepository leaveTypeRepository, IMapper mapper, IEmailSender emailSender)
     {
         _leaveRequestRepository = leaveRequestRepository;
+        _leaveTypeRepository = leaveTypeRepository;
         _mapper = mapper;
         _emailSender = emailSender;
     }
@@ -29,7 +32,7 @@ public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveReque
     {
         BaseCommandResponse response = new();
 
-        CreateLeaveRequestDtoValidator validator = new(_leaveRequestRepository);
+        CreateLeaveRequestDtoValidator validator = new(_leaveTypeRepository);
         var validationResult = await validator.ValidateAsync(request.leaveRequestDto, cancellationToken);
 
         if(validationResult.IsValid == false)

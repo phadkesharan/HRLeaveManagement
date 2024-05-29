@@ -20,6 +20,6 @@ public class LeaveRequest : BaseDomainEntity
 
     public bool? Approved { get; set; }
 
-       public bool Cancelled { get; set; }
+    public bool Cancelled { get; set; }
 
 }
