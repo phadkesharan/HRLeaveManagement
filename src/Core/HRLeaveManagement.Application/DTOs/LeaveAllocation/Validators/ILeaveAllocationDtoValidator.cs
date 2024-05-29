@@ -5,11 +5,11 @@ namespace HRLeaveManagement.Application;
 
 public class ILeaveAllocationDtoValidator : AbstractValidator<ILeaveAllocationDto>
 {
-    private readonly ILeaveAllocationRepository _leaveAllocationRepository;
+    private readonly ILeaveTypeRepository _leaveTypeRepository;
 
-    public ILeaveAllocationDtoValidator(ILeaveAllocationRepository leaveAllocationRepository)
+    public ILeaveAllocationDtoValidator(ILeaveTypeRepository leaveTypeRepository)
     {
-        _leaveAllocationRepository = leaveAllocationRepository;
+        _leaveTypeRepository = leaveTypeRepository;
 
         RuleFor(p => p.NumberOfDays)
             .NotNull().WithMessage("{PropertyName} cannot be Null")
@@ -27,8 +27,8 @@ public class ILeaveAllocationDtoValidator : AbstractValidator<ILeaveAllocationDt
             .NotNull().WithMessage("{PropertyName} cannot be Null")
             .GreaterThan(0)
             .MustAsync(async (id, token) => {
-                var leaveAllocationExists = await _leaveAllocationRepository.Exists(id);
-                return !leaveAllocationExists;                
+                var leaveAllocationExists = await _leaveTypeRepository.Exists(id);
+                return leaveAllocationExists;                
             });
 
     }

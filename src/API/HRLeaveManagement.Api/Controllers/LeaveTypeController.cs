@@ -58,5 +58,4 @@ public class LeaveTypeController : ControllerBase
         return NoContent();
     } 
 
-
 }
