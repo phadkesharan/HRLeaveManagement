@@ -26,4 +26,8 @@
     <ProjectReference Include="..\..\src\Core\HRLeaveManagement.Application\HRLeaveManagement.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="LeaveTypes/Commands/" />
+  </ItemGroup>
+
 </Project>

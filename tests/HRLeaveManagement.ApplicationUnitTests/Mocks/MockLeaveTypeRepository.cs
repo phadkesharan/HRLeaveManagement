@@ -30,13 +30,16 @@ public static class MockLeaveTypeRepository
         mockRepo.Setup(r => r.GetAll()).ReturnsAsync(leaveTypes.AsReadOnly());
 
         mockRepo.Setup(r => r.Get(It.IsAny<int>()))
-            .Returns((int id) => leaveTypes.FirstOrDefault(t => t.Id == id));
+            .ReturnsAsync((int id) => leaveTypes.FirstOrDefault(t => t.Id == id));  
 
         mockRepo.Setup(r => r.Exists(It.IsAny<int>()))
-            .Returns((int id) => leaveTypes.Any(t => t.Id == id));
+            .ReturnsAsync((int id) => leaveTypes.Any(t => t.Id == id));
 
-        mockRepo.Setup(r => r.Add(It.IsAny<LeaveType>()))
-            .Returns((LeaveType leaveType) => leaveTypes.Add(leaveType));
+        mockRepo.Setup(r => r.Add(It.IsAny<LeaveType>())).ReturnsAsync((LeaveType leaveType) => 
+        {
+            leaveTypes.Add(leaveType);
+            return leaveType;
+        });
 
         
         mockRepo.Setup(r => r.Update(It.IsAny<LeaveType>()))
